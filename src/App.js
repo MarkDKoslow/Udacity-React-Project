@@ -22,6 +22,12 @@ class BooksApp extends Component {
     })
   }
 
+  onChangeShelf = (bookId, newShelf) => {
+    BooksAPI.update(bookId, newShelf).then((book) => {
+      console.log(book);
+    })
+  }
+
   render() {
     const { books } = this.state;
 
@@ -65,14 +71,17 @@ class BooksApp extends Component {
               <div>
                 <BookShelf
                   books={ currentlyReadingBooks }
+                  onChangeShelf={ this.onChangeShelf }
                   title="Currently Reading"
                 />
                 <BookShelf
                   books={ wantToReadBooks }
+                  onChangeShelf={ this.onChangeShelf }
                   title="Want To Read"
                 />
                 <BookShelf
                   books={ readBooks }
+                  onChangeShelf={ this.onChangeShelf }
                   title="Read"
                 />
               </div>

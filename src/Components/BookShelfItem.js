@@ -8,6 +8,7 @@ import '../App.css'
 class BookShelfItem extends Component {
   static propTypes = {
     author: PropTypes.string.isRequired,
+    bookId: PropTypes.string.isRequired,
     onShelfChange: PropTypes.func.isRequired,
     selectedOption: PropTypes.oneOf(Object.values(BookStatusEnum)).isRequired,
     title: PropTypes.string.isRequired,
@@ -17,6 +18,7 @@ class BookShelfItem extends Component {
   render() {
     const {
       author,
+      bookId,
       onShelfChange,
       selectedOption,
       title,
@@ -30,6 +32,7 @@ class BookShelfItem extends Component {
         <div className="book-top">
           <BookCover url={ url } />
           <BookShelfSelector
+            bookId={ bookId }
             selectedOption={ selectedOption }
             onShelfChange={ onShelfChange }
           />

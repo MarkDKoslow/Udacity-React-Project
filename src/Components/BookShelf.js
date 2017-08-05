@@ -8,6 +8,7 @@ class BookShelf extends Component {
     books: PropTypes.arrayOf(
       PropTypes.shape({
         authors: PropTypes.arrayOf(PropTypes.string.isRequired),
+        id: PropTypes.string.isRequired,
         imageLinks: PropTypes.shape({
           smallThumbnail: PropTypes.string.isRequired,
           thumbnail: PropTypes.string.isRequired
@@ -16,11 +17,12 @@ class BookShelf extends Component {
         title: PropTypes.string.isRequired
       })
     ),
+    onChangeShelf: PropTypes.func.isRequired,
     title: PropTypes.string.isRequired
   }
 
   render() {
-    const { books, title } = this.props;
+    const { books, onChangeShelf, title } = this.props;
 
     return (
       <div className="bookshelf">
@@ -32,7 +34,8 @@ class BookShelf extends Component {
                 <li key={ index }>
                   <BookShelfItem
                     author={ book.authors[0] }
-                    onShelfChange={ () => {} }
+                    bookId={ book.id }
+                    onShelfChange={ onChangeShelf}
                     selectedOption={ book.shelf }
                     title={ book.title }
                     thumbnail={ book.imageLinks.smallThumbnail }
