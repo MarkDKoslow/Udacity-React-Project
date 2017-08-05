@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import BookShelfItem from './BookShelfItem'
+import { BookStatusEnum } from '../Helpers'
 import '../App.css'
 
 class BookShelf extends Component {
@@ -11,11 +12,11 @@ class BookShelf extends Component {
           smallThumbnail: PropTypes.string.isRequired,
           thumbnail: PropTypes.string.isRequired
         }),
-        shelf: PropTypes.string.isRequired,
+        shelf: PropTypes.oneOf(Object.values(BookStatusEnum)).isRequired,
         title: PropTypes.string.isRequired
       })
     ),
-    title: PropTypes.oneOf(['Currently Reading', 'Read', 'Want To Read'])
+    title: PropTypes.string.isRequired
   }
 
   render() {
@@ -32,7 +33,7 @@ class BookShelf extends Component {
                   <BookShelfItem
                     author={ book.authors[0] }
                     onShelfChange={ () => {} }
-                    selectedOption="Currently Reading"
+                    selectedOption={ book.shelf }
                     title={ book.title }
                     thumbnail={ book.imageLinks.smallThumbnail }
                   />

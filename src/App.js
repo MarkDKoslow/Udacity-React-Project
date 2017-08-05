@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import * as BooksAPI from './BooksAPI'
-import BookShelfItem from './Components/BookShelfItem'
 import BookShelf from './Components/BookShelf'
+import { BookStatusEnum } from './Helpers'
 import './App.css'
 
 class BooksApp extends Component {
@@ -25,9 +25,13 @@ class BooksApp extends Component {
   render() {
     const { books } = this.state;
 
-    const currentlyReadingBooks = books.filter((books) => books.shelf === 'currentlyReading')
-    const wantToReadBooks = books.filter((books) => books.shelf === 'wantToRead')
-    const readBooks = books.filter((books) => books.shelf === 'read')
+    console.log(books);
+    const currentlyReadingBooks =
+      books.filter((books) => books.shelf === BookStatusEnum.CURRENTLYREADING)
+    const wantToReadBooks =
+      books.filter((books) => books.shelf === BookStatusEnum.WANTTOREAD)
+    const readBooks =
+      books.filter((books) => books.shelf === BookStatusEnum.READ)
 
     return (
       <div className="app">

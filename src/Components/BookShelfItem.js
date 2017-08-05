@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import BookCover from './BookCover'
-import BookShelfSelector, { BookStatusEnum } from './BookShelfSelector'
+import BookShelfSelector from './BookShelfSelector'
+import { BookStatusEnum } from '../Helpers'
 import '../App.css'
 
 class BookShelfItem extends Component {

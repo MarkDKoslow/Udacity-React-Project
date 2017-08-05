@@ -1,13 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { BookStatusEnum } from '../Helpers' 
 import '../App.css'
-
-export const BookStatusEnum = {
-  CURRENTLYREADING: 'Currently Reading',
-  WANTTOREAD: 'Want To Read',
-  READ: 'Read',
-  NONE: 'None'
-}
 
 class BookShelfSelector extends Component {
   static propTypes = {
@@ -16,9 +10,11 @@ class BookShelfSelector extends Component {
   }
 
   render() {
+    const { selectedOption } = this.props;
+
     return (
       <div className="book-shelf-changer">
-        <select>
+        <select defaultValue={ selectedOption }>
           <option value="none" disabled>Move to...</option>
           <option value="currentlyReading">Currently Reading</option>
           <option value="wantToRead">Want to Read</option>
