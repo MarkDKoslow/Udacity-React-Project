@@ -10,7 +10,7 @@ class BookShelfItem extends Component {
     onShelfChange: PropTypes.func.isRequired,
     selectedOption: PropTypes.oneOf(Object.values(BookStatusEnum)).isRequired,
     title: PropTypes.string.isRequired,
-    url: PropTypes.string.isRequired
+    thumbnail: PropTypes.string.isRequired
   }
 
   render() {
@@ -19,8 +19,10 @@ class BookShelfItem extends Component {
       onShelfChange,
       selectedOption,
       title,
-      url
+      thumbnail
     } = this.props;
+
+    const url = 'url("' + thumbnail + '")'    // TODO: Better way to do this
 
     return (
       <div className="book">
