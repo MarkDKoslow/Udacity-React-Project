@@ -44,4 +44,8 @@ class BookShelfItem extends Component {
   }
 }
 
+BookShelfItem.defaultProps = {
+  author: "Unlisted Author"
+}
+
 export default BookShelfItem

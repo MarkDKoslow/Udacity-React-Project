@@ -34,17 +34,14 @@ class BooksApp extends Component {
   }
 
   handleSearchInput = (e) => {
-    console.log(e.target.value);
-
     const searchQuery = e.target.value
     this.setState({ query: searchQuery })
     this.onSearchInputChange(searchQuery)
   }
 
   onSearchInputChange = (input) => {
-    console.log("==================");
     BooksAPI.search(input, 10).then((results) => {
-      console.log("-----------------------");
+      console.log(results);
       this.setState({ searchResults: results })
     })
   }

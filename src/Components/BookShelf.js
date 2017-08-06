@@ -33,7 +33,7 @@ class BookShelf extends Component {
               books.map((book, index) => (
                 <li key={ index }>
                   <BookShelfItem
-                    author={ book.authors[0] }
+                    author={ book.authors && book.authors.join(', ') }
                     bookId={ book.id }
                     onShelfChange={ onChangeShelf}
                     selectedOption={ book.shelf }

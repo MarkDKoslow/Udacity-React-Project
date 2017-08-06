@@ -34,4 +34,8 @@ class BookShelfSelector extends Component {
   }
 }
 
+BookShelfSelector.defaultProps = {
+  selectedOption: 'None'
+}
+
 export default BookShelfSelector
