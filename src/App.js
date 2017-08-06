@@ -36,8 +36,20 @@ class BooksApp extends Component {
 
   handleSearchInput = (e) => {
     const searchQuery = e.target.value
-    this.setState({ query: searchQuery })
-    this.onSearchInputChange(searchQuery)
+
+    if (searchQuery === '') {
+      this.resetSearch()
+    } else {
+      this.setState({ query: searchQuery })
+      this.onSearchInputChange(searchQuery)
+    }
+  }
+
+  resetSearch = () => {
+    this.setState({
+      query: '',
+      searchResults: []
+    })
   }
 
   onSearchInputChange = (input) => {
