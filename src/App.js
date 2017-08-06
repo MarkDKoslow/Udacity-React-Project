@@ -13,7 +13,8 @@ class BooksApp extends Component {
      * pages, as well as provide a good URL they can bookmark and share.
      */
     showSearchPage: true,
-    books: []
+    books: [],
+    searchResults: []
   }
 
   componentDidMount() {
@@ -23,17 +24,33 @@ class BooksApp extends Component {
   }
 
   onChangeShelf = (bookId, newShelf) => {
-    function bookWithMatchingId(book) { return book.id === bookId }
-    // TODO: refactor this logic
+    function matchingId(book) { return book.id === bookId }
+
     BooksAPI.update(bookId, newShelf).then((book) => {
-      const updatedBook = this.state.books.find(bookWithMatchingId)
+      const updatedBook = this.state.books.find(matchingId)     // TODO: refactor this logic
       updatedBook.shelf = newShelf
       this.setState({ books: this.state.books })
     })
   }
 
+  handleSearchInput = (e) => {
+    console.log(e.target.value);
+
+    const searchQuery = e.target.value
+    this.setState({ query: searchQuery })
+    this.onSearchInputChange(searchQuery)
+  }
+
+  onSearchInputChange = (input) => {
+    console.log("==================");
+    BooksAPI.search(input, 10).then((results) => {
+      console.log("-----------------------");
+      this.setState({ searchResults: results })
+    })
+  }
+
   render() {
-    const { books } = this.state;
+    const { books, searchResults } = this.state;
 
     console.log(books);
     const currentlyReadingBooks =
@@ -58,12 +75,15 @@ class BooksApp extends Component {
                   However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
                   you don't find a specific author or title. Every search is limited by search terms.
                 */}
-                <input type="text" placeholder="Search by title or author"/>
-
+                <input type="text" placeholder="Search by title or author" onChange={ this.handleSearchInput.bind(this) } />
               </div>
             </div>
             <div className="search-books-results">
-              <ol className="books-grid"></ol>
+              <BookShelf
+                books={ searchResults }
+                onChangeShelf={ this.onChangeShelf }
+                title="Search Results"
+              />
             </div>
           </div>
         ) : (
