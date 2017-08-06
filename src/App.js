@@ -23,8 +23,12 @@ class BooksApp extends Component {
   }
 
   onChangeShelf = (bookId, newShelf) => {
+    function bookWithMatchingId(book) { return book.id === bookId }
+    // TODO: refactor this logic
     BooksAPI.update(bookId, newShelf).then((book) => {
-      console.log(book);
+      const updatedBook = this.state.books.find(bookWithMatchingId)
+      updatedBook.shelf = newShelf
+      this.setState({ books: this.state.books })
     })
   }
 
