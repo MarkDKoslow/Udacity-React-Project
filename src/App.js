@@ -13,7 +13,6 @@ class BooksApp extends Component {
      * users can use the browser's back and forward buttons to navigate between
      * pages, as well as provide a good URL they can bookmark and share.
      */
-    showSearchPage: true,
     books: [],
     query: '',
     searchResults: []
@@ -59,12 +58,21 @@ class BooksApp extends Component {
 
     return (
       <div className="app">
-        <Route exact path='/search' render={() => (
+        <Route exact path='/search' render={({ history }) => (
           <div className="search-books">
             <div className="search-books-bar">
-              <a className="close-search" onClick={() => this.setState({ showSearchPage: false })}>Close</a>
+              <a
+                className="close-search"
+                onClick={ () => history.push('/') }
+              >
+                Close
+              </a>
               <div className="search-books-input-wrapper">
-                <input type="text" placeholder="Search by title or author" onChange={ this.handleSearchInput.bind(this) } />
+                <input
+                  type="text"
+                  placeholder="Search by title or author"
+                  onChange={ this.handleSearchInput.bind(this) }
+                />
               </div>
             </div>
             <div className="search-books-results">
@@ -76,7 +84,7 @@ class BooksApp extends Component {
             </div>
           </div>
         )}/>
-        <Route exact path='/' render={() => (
+      <Route exact path='/' render={({ history }) => (
           <div className="list-books">
             <div className="list-books-title">
               <h1>MyReads</h1>
@@ -101,7 +109,11 @@ class BooksApp extends Component {
               </div>
             </div>
             <div className="open-search">
-              <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
+              <a
+                onClick={ () => history.push('/search') }
+              >
+                Add a book
+              </a>
             </div>
           </div>
         )}/>
